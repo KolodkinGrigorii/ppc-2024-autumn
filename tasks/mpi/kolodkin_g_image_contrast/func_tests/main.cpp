@@ -52,7 +52,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_image_one_pixel) {
     testTaskSequential.run();
     testTaskSequential.post_processing();
     result2_out = *reinterpret_cast<std::vector<int> *>(taskDataSeq->outputs[0]);
-    for (unsigned long i = 0; i < global_out.size(); i++) {
+    for (unsigned long i = 0; i < result_out.size(); i++) {
       ASSERT_EQ(result_out[i], result2_out[i]);
     }
   }
