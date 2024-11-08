@@ -68,6 +68,7 @@ bool kolodkin_g_image_contrast_mpi::TestMPITaskParallel::pre_processing() {
     auto input_size = taskData->inputs_count[0];
     auto* input_ptr = reinterpret_cast<int*>(taskData->inputs[0]);
     input_ = std::vector<int>(input_ptr, input_ptr + input_size);
+    output_ = std::vector<int>(taskData->inputs_count[0]);
     auto total_brightness = 0;
     for (size_t i = 0; i < input_size; i += 3) {
       total_brightness += static_cast<int>(input_[i] * 0.299 + input_[i + 1] * 0.587 + input_[i + 2] * 0.114);
