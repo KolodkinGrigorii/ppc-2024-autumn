@@ -17,7 +17,9 @@ TEST(kolodkin_g_image_contrast_MPI, Test_image_one_pixel) {
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataMpi = std::make_shared<ppc::core::TaskData>();
   if (world.rank() == 0) {
-    image = {50, 14, 5};
+    image.push_back(50);
+    image.push_back(14);
+    image.push_back(5);
     taskDataMpi->inputs.emplace_back(reinterpret_cast<uint8_t *>(image.data()));
     taskDataMpi->inputs_count.emplace_back(image.size());
     taskDataMpi->outputs.emplace_back(reinterpret_cast<uint8_t *>(new std::vector<int>(global_out)));
@@ -99,7 +101,12 @@ TEST(kolodkin_g_image_contrast_MPI, Test_image_two_pixels) {
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataMpi = std::make_shared<ppc::core::TaskData>();
   if (world.rank() == 0) {
-    image = {50, 14, 5, 10, 200, 105};
+    image.push_back(50);
+    image.push_back(14);
+    image.push_back(5);
+    image.push_back(10);
+    image.push_back(200);
+    image.push_back(105);
     taskDataMpi->inputs.emplace_back(reinterpret_cast<uint8_t *>(image.data()));
     taskDataMpi->inputs_count.emplace_back(image.size());
     taskDataMpi->outputs.emplace_back(reinterpret_cast<uint8_t *>(new std::vector<int>(global_out)));
