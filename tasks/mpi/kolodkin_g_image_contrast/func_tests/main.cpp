@@ -9,7 +9,7 @@
 
 TEST(kolodkin_g_image_contrast_MPI, Test_image_one_pixel) {
   boost::mpi::communicator world;
-  std::vector<int> image = {50, 14, 5};
+  std::vector<int> image;
 
   // Create data
   std::vector<int> global_out(3, 0);
@@ -17,6 +17,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_image_one_pixel) {
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataMpi = std::make_shared<ppc::core::TaskData>();
   if (world.rank() == 0) {
+    image = {50, 14, 5};
     taskDataMpi->inputs.emplace_back(reinterpret_cast<uint8_t *>(image.data()));
     taskDataMpi->inputs_count.emplace_back(image.size());
     taskDataMpi->outputs.emplace_back(reinterpret_cast<uint8_t *>(new std::vector<int>(global_out)));
@@ -55,7 +56,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_image_one_pixel) {
 
 TEST(kolodkin_g_image_contrast_MPI, Test_incorrect_image) {
   boost::mpi::communicator world;
-  std::vector<int> image = {50, 14};
+  std::vector<int> image;
 
   // Create data
   std::vector<int> global_out(3, 0);
@@ -63,6 +64,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_incorrect_image) {
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataMpi = std::make_shared<ppc::core::TaskData>();
   if (world.rank() == 0) {
+    image = {50, 14};
     taskDataMpi->inputs.emplace_back(reinterpret_cast<uint8_t *>(image.data()));
     taskDataMpi->inputs_count.emplace_back(image.size());
     taskDataMpi->outputs.emplace_back(reinterpret_cast<uint8_t *>(new std::vector<int>(global_out)));
@@ -90,7 +92,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_incorrect_image) {
 }
 TEST(kolodkin_g_image_contrast_MPI, Test_image_two_pixels) {
   boost::mpi::communicator world;
-  std::vector<int> image = {50, 14, 5, 10, 200, 105};
+  std::vector<int> image;
 
   // Create data
   std::vector<int> global_out(3, 0);
@@ -98,6 +100,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_image_two_pixels) {
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataMpi = std::make_shared<ppc::core::TaskData>();
   if (world.rank() == 0) {
+    image = {50, 14, 5, 10, 200, 105};
     taskDataMpi->inputs.emplace_back(reinterpret_cast<uint8_t *>(image.data()));
     taskDataMpi->inputs_count.emplace_back(image.size());
     taskDataMpi->outputs.emplace_back(reinterpret_cast<uint8_t *>(new std::vector<int>(global_out)));
@@ -135,7 +138,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_image_two_pixels) {
 }
 TEST(kolodkin_g_image_contrast_MPI, Test_incorrect_color_image) {
   boost::mpi::communicator world;
-  std::vector<int> image = {50, 14, 256};
+  std::vector<int> image;
 
   // Create data
   std::vector<int> global_out(3, 0);
@@ -143,6 +146,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_incorrect_color_image) {
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataMpi = std::make_shared<ppc::core::TaskData>();
   if (world.rank() == 0) {
+    image = {50, 14, 256};
     taskDataMpi->inputs.emplace_back(reinterpret_cast<uint8_t *>(image.data()));
     taskDataMpi->inputs_count.emplace_back(image.size());
     taskDataMpi->outputs.emplace_back(reinterpret_cast<uint8_t *>(new std::vector<int>(global_out)));
@@ -171,9 +175,6 @@ TEST(kolodkin_g_image_contrast_MPI, Test_incorrect_color_image) {
 TEST(kolodkin_g_image_contrast_MPI, Test_big_image) {
   boost::mpi::communicator world;
   std::vector<int> image;
-  for (unsigned long i = 0; i < 999; i++) {
-    image.push_back(0 + rand() % 255);
-  }
 
   // Create data
   std::vector<int> global_out(999, 0);
@@ -181,6 +182,9 @@ TEST(kolodkin_g_image_contrast_MPI, Test_big_image) {
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataMpi = std::make_shared<ppc::core::TaskData>();
   if (world.rank() == 0) {
+    for (unsigned long i = 0; i < 999; i++) {
+      image.push_back(0 + rand() % 255);
+    }
     taskDataMpi->inputs.emplace_back(reinterpret_cast<uint8_t *>(image.data()));
     taskDataMpi->inputs_count.emplace_back(image.size());
     taskDataMpi->outputs.emplace_back(reinterpret_cast<uint8_t *>(new std::vector<int>(global_out)));
