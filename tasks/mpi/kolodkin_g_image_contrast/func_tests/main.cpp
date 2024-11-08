@@ -94,7 +94,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_image_two_pixels) {
   std::vector<int> image;
 
   // Create data
-  std::vector<int> global_out(3, 0);
+  std::vector<int> global_out(6, 0);
 
   // Create TaskData
   std::shared_ptr<ppc::core::TaskData> taskDataMpi = std::make_shared<ppc::core::TaskData>();
@@ -114,7 +114,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_image_two_pixels) {
 
   if (world.rank() == 0) {
     // Create data
-    std::vector<int> reference_out(3, 0);
+    std::vector<int> reference_out(6, 0);
 
     // Create TaskData
     std::shared_ptr<ppc::core::TaskData> taskDataSeq = std::make_shared<ppc::core::TaskData>();
