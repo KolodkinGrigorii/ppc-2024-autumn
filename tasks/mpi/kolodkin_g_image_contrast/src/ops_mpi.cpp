@@ -26,7 +26,7 @@ bool kolodkin_g_image_contrast_mpi::TestMPITaskSequential::validation() {
   }
   auto* input_ptr = reinterpret_cast<int*>(taskData->inputs[0]);
   for (unsigned long i = 0; i < taskData->inputs_count[0]; i++) {
-    if (*input_ptr > 255 || *input_ptr<0) {
+    if (*input_ptr > 255 || *input_ptr < 0) {
       return false;
     }
     input_ptr++;
