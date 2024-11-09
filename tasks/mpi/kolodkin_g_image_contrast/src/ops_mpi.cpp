@@ -21,8 +21,15 @@ bool kolodkin_g_image_contrast_mpi::TestMPITaskSequential::pre_processing() {
 
 bool kolodkin_g_image_contrast_mpi::TestMPITaskSequential::validation() {
   internal_order_test();
-  if (taskData->inputs_count[0] % 3 != 0) {
+  if (taskData->inputs_count[0] <= 0 || taskData->inputs_count[0] % 3 != 0) {
     return false;
+  }
+  auto* input_ptr = reinterpret_cast<int*>(taskData->inputs[0]);
+  for (unsigned long i = 0; i < taskData->inputs_count[0]; i++) {
+    if (*input_ptr > 255 || *input_ptr < 0) {
+      return false;
+    }
+    input_ptr++;
   }
   return true;
 }
@@ -86,8 +93,17 @@ bool kolodkin_g_image_contrast_mpi::TestMPITaskParallel::pre_processing() {
 
 bool kolodkin_g_image_contrast_mpi::TestMPITaskParallel::validation() {
   internal_order_test();
-  if (taskData->inputs_count[0] % 3 != 0) {
-    return false;
+  if (world.rank() == 0) {
+    if (taskData->inputs_count[0] <= 0 || taskData->inputs_count[0] % 3 != 0) {
+      return false;
+    }
+    auto* input_ptr = reinterpret_cast<int*>(taskData->inputs[0]);
+    for (unsigned long i = 0; i < taskData->inputs_count[0]; i++) {
+      if (*input_ptr > 255 || *input_ptr < 0) {
+        return false;
+      }
+      input_ptr++;
+    }
   }
   return true;
 }
