@@ -169,7 +169,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_postprocessing) {
     testTaskSequential.run();
     testTaskSequential.post_processing();
   }
-}
+}*/
 
 TEST(kolodkin_g_image_contrast_MPI, Test_global_and_reference) {
   boost::mpi::communicator world;
@@ -215,7 +215,7 @@ TEST(kolodkin_g_image_contrast_MPI, Test_global_and_reference) {
     global_out = *reinterpret_cast<std::vector<int> *>(taskDataMpi->outputs[0]);
     reference_out = *reinterpret_cast<std::vector<int> *>(taskDataSeq->outputs[0]);
   }
-}*/
+}
 
 TEST(kolodkin_g_image_contrast_MPI, Test_image_one_pixel) {
   boost::mpi::communicator world;
