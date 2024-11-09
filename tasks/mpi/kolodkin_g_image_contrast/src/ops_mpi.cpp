@@ -83,7 +83,7 @@ bool kolodkin_g_image_contrast_mpi::TestMPITaskParallel::pre_processing() {
     }
     local_input_ = std::vector<int>(input_ptr, input_ptr + delta);
   } else {
-    int input_data_size;
+    int input_data_size = taskData->inputs_count[0] / world.size();
     world.recv(0, 0, input_data_size);
     local_input_.resize(input_data_size);
     world.recv(0, 1, local_input_);
