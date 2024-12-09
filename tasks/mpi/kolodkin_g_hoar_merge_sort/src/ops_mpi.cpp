@@ -115,19 +115,19 @@ bool kolodkin_g_hoar_merge_sort_mpi::TestMPITaskParallel::run() {
     std::vector<int> final_result;
     std::vector<int> current_indices(num_processes, 0);
     std::vector<bool> done(num_processes, false);
-    int num_segments = 0;
+    size_t num_segments = 0;
     for (size_t i = 0; i < num_processes; i++) {
       if (send_counts[i] > 0) {
         num_segments++;
       }
     }
     while (final_result.size() < input_.size()) {
-      int min_index = -1;
-      int min_value = std::numeric_limits<int>::max();
+      size_t min_index = -1;
+      size_t min_value = std::numeric_limits<int>::max();
 
       for (size_t i = 0; i < num_processes; i++) {
         if (!done[i] && current_indices[i] < send_counts[i]) {
-          int value = sorted_data[displacements[i] + current_indices[i]];
+          size_t value = sorted_data[displacements[i] + current_indices[i]];
           if (value < min_value) {
             min_value = value;
             min_index = i;
