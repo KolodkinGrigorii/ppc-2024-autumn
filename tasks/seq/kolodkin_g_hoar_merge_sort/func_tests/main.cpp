@@ -110,7 +110,7 @@ TEST(kolodkin_g_hoar_merge_sort_MPI, Test_big_vector) {
   std::vector<int> reference_out(1000, 0);
 
   // Create TaskData
-  for (int i = 0; i < 1000; i++) {
+  for (unsigned long i = 0; i < 1000; i++) {
     vector.push_back(-1000 + rand() % 1000);
   }
   std::shared_ptr<ppc::core::TaskData> taskDataSeq = std::make_shared<ppc::core::TaskData>();
