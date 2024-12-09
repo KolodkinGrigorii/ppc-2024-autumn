@@ -43,7 +43,7 @@ TEST(seq_kolodkin_g_hoar_merge_sort_test, test_pipeline_run) {
   ppc::core::Perf::print_perf_statistic(perfResults);
   std::sort(vec.begin(), vec.end());
   out = *reinterpret_cast<std::vector<int> *>(taskDataSeq->outputs[0]);
-  for (int i = 0; i < vec.size(); i++) {
+  for (unsigned long i = 0; i < vec.size(); i++) {
     ASSERT_EQ(vec[i], out[i]);
   }
 }
@@ -84,7 +84,7 @@ TEST(seq_kolodkin_g_hoar_merge_sort_test, test_task_run) {
   ppc::core::Perf::print_perf_statistic(perfResults);
   std::sort(vec.begin(), vec.end());
   out = *reinterpret_cast<std::vector<int> *>(taskDataSeq->outputs[0]);
-  for (int i = 0; i < vec.size(); i++) {
+  for (unsigned long i = 0; i < vec.size(); i++) {
     ASSERT_EQ(vec[i], out[i]);
   }
 }
