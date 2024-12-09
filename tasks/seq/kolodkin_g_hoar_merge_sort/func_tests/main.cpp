@@ -49,7 +49,7 @@ TEST(kolodkin_g_hoar_merge_sort_MPI, Test_vector_with_two_elems) {
   testTaskSequential.post_processing();
   reference_out = *reinterpret_cast<std::vector<int> *>(taskDataSeq->outputs[0]);
   std::sort(vector.begin(), vector.end());
-  for (int i = 0; i < vector.size(); i++) {
+  for (unsigned long i = 0; i < vector.size(); i++) {
     ASSERT_EQ(reference_out[i], vector[i]);
   }
 }
@@ -74,7 +74,7 @@ TEST(kolodkin_g_hoar_merge_sort_MPI, Test_vector_with_three_elems) {
   testTaskSequential.post_processing();
   reference_out = *reinterpret_cast<std::vector<int> *>(taskDataSeq->outputs[0]);
   std::sort(vector.begin(), vector.end());
-  for (int i = 0; i < vector.size(); i++) {
+  for (unsigned long i = 0; i < vector.size(); i++) {
     ASSERT_EQ(reference_out[i], vector[i]);
   }
 }
@@ -99,7 +99,7 @@ TEST(kolodkin_g_hoar_merge_sort_MPI, Test_vector_with_negative_elems) {
   testTaskSequential.post_processing();
   reference_out = *reinterpret_cast<std::vector<int> *>(taskDataSeq->outputs[0]);
   std::sort(vector.begin(), vector.end());
-  for (int i = 0; i < vector.size(); i++) {
+  for (unsigned long i = 0; i < vector.size(); i++) {
     ASSERT_EQ(reference_out[i], vector[i]);
   }
 }
@@ -126,7 +126,7 @@ TEST(kolodkin_g_hoar_merge_sort_MPI, Test_big_vector) {
   testTaskSequential.post_processing();
   reference_out = *reinterpret_cast<std::vector<int> *>(taskDataSeq->outputs[0]);
   std::sort(vector.begin(), vector.end());
-  for (int i = 0; i < vector.size(); i++) {
+  for (unsigned long i = 0; i < vector.size(); i++) {
     ASSERT_EQ(reference_out[i], vector[i]);
   }
 }
